@@ -1,15 +1,18 @@
-# front 개발을 위한 하드코드 spring API 배포를 위한 manifest 파일.
-
-apiVersion: apps/hardcode
+apiVersion: apps/v1
 kind: Deployment
 metadata: # deployment의 metadata
-  name: spring-hardcode-deploy
+  name: spring-board-deploy
 spec: # deployment의 spec
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: spring
       tier: backend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 2
   template: # 다음 줄부터는 각각 pod의 설정
     metadata:
       labels: # 각 pod들의 metadata
@@ -18,7 +21,7 @@ spec: # deployment의 spec
     spec: # pod의 spec
       containers:
         - name: echo
-          image: hyelie/hardcodespring
+          image: gcr.io/temporal-fx-321902/bizkicks-backend
           ports:  # 
             - containerPort: 8080
           readinessProbe: # 로드가 너무 많아 일시적 처리 불가 상태를 확인
@@ -33,14 +36,30 @@ spec: # deployment의 spec
               path: /
             initialDelaySeconds: 10
             failureThreshold: 5
+          env:
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: userinfo
+                  key: username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: userinfo
+                  key: userpw
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: dbinfo
+                  key: url
 
 
 ---
 
-apiVersion: apps/hardcode
+apiVersion: v1
 kind: Service
 metadata: # Service의 metadata
-  name: spring-hardcode-deploy
+  name: spring-board-service
 spec:
   type: LoadBalancer
   ports:
