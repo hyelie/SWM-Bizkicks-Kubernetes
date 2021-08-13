@@ -39,9 +39,14 @@ spec:
               secretKeyRef:
                 name: userinfo
                 key: userpw
+          - name: LANG
+            value: C.UTF-8
         ports:
           - containerPort: 3306
             name: mysql
+        args:
+        - --character-set-server=utf8mb4
+        - --collation-server=utf8mb4_general_ci
         volumeMounts:
           - name: mysql-persistent-storage
             mountPath: /var/lib/mysql

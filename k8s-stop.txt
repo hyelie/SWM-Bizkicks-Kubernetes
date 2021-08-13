@@ -1,0 +1,1 @@
+gcloud container clusters resize hardcoded-api --size=0 --zone=us-central1-c

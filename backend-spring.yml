@@ -21,21 +21,21 @@ spec: # deployment의 spec
     spec: # pod의 spec
       containers:
         - name: echo
-          image: gcr.io/temporal-fx-321902/bizkicks-backend:0.0.1
+          image: gcr.io/temporal-fx-321902/bizkicks-backend:0.0.3
           ports:  # 
             - containerPort: 8080
-          readinessProbe: # 로드가 너무 많아 일시적 처리 불가 상태를 확인
-            httpGet:
-              port: 8080
-              path: /
-            initialDelaySeconds: 10
-            failureThreshold: 5
-          livenessProbe:  # 응답이 없으면 자동 재시작.
-            httpGet:
-              port: 8080
-              path: /
-            initialDelaySeconds: 10
-            failureThreshold: 5
+          # readinessProbe: # 로드가 너무 많아 일시적 처리 불가 상태를 확인
+          #   httpGet:
+          #     port: 8080
+          #     path: /
+          #   initialDelaySeconds: 10
+          #   failureThreshold: 5
+          # livenessProbe:  # 응답이 없으면 자동 재시작.
+          #   httpGet:
+          #     port: 8080
+          #     path: /
+          #   initialDelaySeconds: 10
+          #   failureThreshold: 5
           env:
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
