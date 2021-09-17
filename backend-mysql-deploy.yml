@@ -55,6 +55,7 @@ spec:
           persistentVolumeClaim:
             claimName: mysql-pvc
 
+
 # mysql-root-pw : rootpw
 # kubectl create secret generic mysql-root-pw --from-literal=rootpw=root
 
@@ -62,6 +63,6 @@ spec:
 # kubectl create secret generic userinfo --from-literal=username='depuser' --from-literal=userpw='depuserpw'
 
 # dbinfo : dbname, url
-# kubectl create secret generic dbinfo --from-literal=dbname=bizschema --from-literal=url='jdbc:mysql://35.184.171.248:3306/bizschema?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&autoReconnectForPools=true&serverTimezone=UTC'
+# kubectl create secret generic dbinfo --from-literal=dbname=bizschema --from-literal=url='jdbc:mysql://35.184.171.248:3306/bizschema?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&autoReconnectForPools=true&serverTimezone=UTC'
 
 # kubectl get secrets

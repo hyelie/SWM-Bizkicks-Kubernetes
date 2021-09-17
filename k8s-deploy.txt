@@ -1,0 +1,12 @@
+# deploy
+kubectl apply -f "파일명"
+kubectl apply -f bizkicks-kubernetes/backend-spring.yml
+
+# check
+kubectl get all
+
+# connect
+kubectl get pod
+kubectl exec -it mysql-deploy-78fd74555f-fkm2p bash
+mysql -u depuser -p
+depuserpw

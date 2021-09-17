@@ -21,7 +21,7 @@ spec: # deployment의 spec
     spec: # pod의 spec
       containers:
         - name: echo
-          image: gcr.io/temporal-fx-321902/bizkicks-backend:0.0.3
+          image: gcr.io/temporal-fx-321902/bizkicks-backend:0.0.5
           ports:  # 
             - containerPort: 8080
           # readinessProbe: # 로드가 너무 많아 일시적 처리 불가 상태를 확인
